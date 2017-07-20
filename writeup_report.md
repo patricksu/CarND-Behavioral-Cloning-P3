@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 [image2]: ./examples/hist_peng_recovery.png "Self collected recovery data histogram"
 [image3]: ./examples/modelArch.png "Model Architecture"
 [image4]: ./examples/UdacityImgShow.png "Udacity images show"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
+[image5]: ./examples/leftRightImages.png"
 [image6]: ./examples/placeholder_small.png "Normal Image"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
 
@@ -91,9 +91,12 @@ The final model architecture (model.py lines 166-189) consisted of a convolution
 ####3. Creation of the Training Set & Training Process
 
 I used the Udacity provide data together with a dataset of "afterBridge". To collectthe "afterBridge" data, I drove the vehicle back-and-forth around the muddy area for more than five laps. I also collected reverse and recovery image sets, although they were not used in building the final model. Instead I flipped the Udacity images to mimic reverse driving, and also used the left and right images to mimic recovery driving. 
-The figures below illustrate the augmentation of the images. 
+The figure below shows a few images from the Udacity dataset. It only shows image with over 0.5 steering angles. As shown, the data has some nosise. E.g. the road in image at (4,2) is straight but the angle is 0.626. However, as long as the model can generate larger angles to get the vehicle back when it is almost off-track, it should work. So the situation shown in the iamge (4,2) should not matter that much. 
+![alt text][image4]
 
-![alt text][image6]
+The figure below illustrates the left and right camera images. 
+![alt text][image5]
+
 ![alt text][image7]
 
 Etc ....
