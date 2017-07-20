@@ -84,28 +84,14 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 ####2. Final Model Architecture
 
-The final model architecture (model.py lines 166-189) consisted of a convolution neural network with the following layers and layer sizes ...
-![alt text][image3]
-
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+The final model architecture (model.py lines 166-189) consisted of a convolution neural network with the following layers and layer sizes. Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
 ![alt text][image3]
 
 ####3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
-
-![alt text][image2]
-
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
-
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
-
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+I used the Udacity provide data together with a dataset of "afterBridge". To collectthe "afterBridge" data, I drove the vehicle back-and-forth around the muddy area for more than five laps. I also collected reverse and recovery image sets, although they were not used in building the final model. Instead I flipped the Udacity images to mimic reverse driving, and also used the left and right images to mimic recovery driving. 
+The figures below illustrate the augmentation of the images. 
 
 ![alt text][image6]
 ![alt text][image7]
