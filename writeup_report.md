@@ -16,7 +16,7 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/hist_U.png "Udacity data histogram"
 [image2]: ./examples/hist_peng_recovery.png "Self collected recovery data histogram"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
+[image3]: ./examples/modelArch.png "Model Architecture"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
 [image6]: ./examples/placeholder_small.png "Normal Image"
@@ -74,25 +74,22 @@ As a result, I did not use the recovery data, instead I used the Udacity data's 
 
 The overall strategy for deriving a model architecture was to train a model, test it on the simulator, see where it fails, and collect more data for the failing section. At the same, I tuned the parameters, including dropout rate, learning rate, left and right images' angle offsets. 
 
-My first step was to use a convolution neural network model. I adopted the one from [Vivek] (https://chatbotslife.com/using-augmentation-to-mimic-human-driving-496b569760a9), which was proven to work on this problem. This model has a total of ## parameters. 
+My first step was to use a convolution neural network model. I adopted the one from [Vivek] (https://chatbotslife.com/using-augmentation-to-mimic-human-driving-496b569760a9), which was proven to work on this problem. This model has a total of 23.9 Million parameters. I fed three images to the model and found that it did not always converge. When using SGD optimizer, it converged instantly (loss becoming ZERO). This proved that the model worked. But using Adam optimizer, the loss oscillated a lot. It might be because Adam adjusted the learning rate and overshot the minimal point. 
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+I used the left image (angle + .25), center image, and right image (angle - 0.25) in the training. In the validation, I only used center images, since the driving evaluation is based solely on the center image. Using left and right images with arbitrary angle shifts actually added more nosie to the data. As a result, the traing loss is much larger than the validation loss in the first two epochs. So in this project, I did not treat this as overfitting. As the training went on, the traing and validation losses both reduced, and traing loss became closer to the validation loss. At the end, traing and validation loss were both around 0.013. 
 
-To combat the overfitting, I modified the model so that ...
-
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+The final step was to run the simulator to see how well the car was driving around track one. My initial model run off track right after the bridge. So I collected more "afterBridge" data, and tuned the model parameters using the new data (like transfer-learning). After this, the model was able to safely pass the bridge, but failed again where a small section of the right-side road mark disappeared. This implied that the model relied on the road marks. To combat this problem, I tried multiple approaches, including collecting more data from that section, augmenting the existing data, and adjusting parameters. It turned that collecting more data did not help much, but data augmentation worked magically. I augmented the data by randomly adjusting the brightness and adding random shadows. 
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 ####2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture (model.py lines 166-189) consisted of a convolution neural network with the following layers and layer sizes ...
+![alt text][image3]
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-![alt text][image1]
+![alt text][image3]
 
 ####3. Creation of the Training Set & Training Process
 
