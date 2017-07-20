@@ -1,9 +1,5 @@
 #**Behavioral Cloning** 
 
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Behavioral Cloning Project**
@@ -54,23 +50,21 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
-
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 161-185). It has a total of 7 convolution layers followed by 3 fully connected layers. Each convolution and fully connected layer is followed by ELU activations to introduce nonlinearity (code line 166~189), and the data is normalized in the model using a Keras lambda layer (code line 168). A 1x1 filter with depth 3 is used to transform the color space of the images. Research has shown that different color spaces are better suited for different applications.
 
 ####2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+To reduce overfitting, the model contains three dropout layers which follow sets of convolution layers (model.py lines 173, 178, 183). I used Udacity's provided data as well as my own recovery data to train the model. The Udacity data is randomly split into training and validation data (20% validation). Each model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 ####3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 191). I used the default starting learning rate of 0.001 (also tested other rates but they do not make much difference.) The Dropout rate is 0.3, less than normally used 0.5, as this dataset is not big. Using 0.2 did not help addressing overfitting problem. So 0.3 is a good tradeoff point. Batch_size is picked as 32: the biggest allowed by my GPU memory. The steering angle offset I used on the left and right camera images is 0.25. 
 
 ####4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
+Training data was chosen to keep the vehicle driving on the road. I collected recovery andreverse driving and added these data to the Udacity dataset. However the combined dataset did not work well. 
+
+used a combination of center lane driving, recovering from the left and right sides of the road ... 
 
 For details about how I created the training data, see the next section. 
 
