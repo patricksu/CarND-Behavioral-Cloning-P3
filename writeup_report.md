@@ -97,7 +97,8 @@ The figure below shows a few images from the Udacity dataset. It only shows imag
 The figure below illustrates the left and right camera images. 
 ![alt text][image5]
 
-![alt text][image7]
+The figure below illustrates brightness augmentation. 
+![alt text][image6]
 
 Etc ....
 
