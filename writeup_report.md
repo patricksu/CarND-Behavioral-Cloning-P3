@@ -19,7 +19,7 @@ The goals / steps of this project are the following:
 [image3]: ./examples/modelArch.png "Model Architecture"
 [image4]: ./examples/UdacityImgShow.png "Udacity images show"
 [image5]: ./examples/leftRightImages.png"
-[image6]: ./examples/placeholder_small.png "Normal Image"
+[image6]: ./examples/brightnessAug.png "brightness augmentation"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
 
 ## Rubric Points
