@@ -17,7 +17,7 @@ The goals / steps of this project are the following:
 [image1]: ./examples/hist_U.png "Udacity data histogram"
 [image2]: ./examples/hist_peng_recovery.png "Self collected recovery data histogram"
 [image3]: ./examples/modelArch.png "Model Architecture"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
+[image4]: ./examples/UdacityImgShow.png "Udacity images show"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
 [image6]: ./examples/placeholder_small.png "Normal Image"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
