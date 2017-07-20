@@ -14,8 +14,8 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
+[image1]: ./examples/hist_U.png "Udacity data histogram"
+[image2]: ./examples/hist_peng_recovery.png "Self collected recovery data histogram"
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
@@ -62,7 +62,9 @@ The model used an adam optimizer, so the learning rate was not tuned manually (m
 
 ####4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I collected recovery andreverse driving and added these data to the Udacity dataset. However the combined dataset did not work well. 
+Training data was chosen to keep the vehicle driving on the road. I collected recovery andreverse driving and added these data to the Udacity dataset. However the combined dataset did not work well. As shown by the steering angle histograms of the Udacity data and the recovery data, these two driving behaviors are quite different. 
+![alt text][image1]
+![alt text][image2]
 
 used a combination of center lane driving, recovering from the left and right sides of the road ... 
 
