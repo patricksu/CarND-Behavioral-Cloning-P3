@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 [image2]: ./examples/hist_peng_recovery.png "Self collected recovery data histogram"
 [image3]: ./examples/modelArch.png "Model Architecture"
 [image4]: ./examples/UdacityImgShow.png "Udacity images show"
-[image5]: ./examples/leftRightImages.png “left and right images show”
+[image5]: ./examples/leftRightImages.png "flipping images"
 [image6]: ./examples/brightnessAug.png "brightness augmentation"
 [image7]: ./examples/Shadowing_Visualization.png "Shadowing augmentation"
 
