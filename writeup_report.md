@@ -50,19 +50,19 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 161-185). It has a total of 7 convolution layers followed by 3 fully connected layers. Each convolution and fully connected layer is followed by ELU activations to introduce nonlinearity (code line 166~189), and the data is normalized in the model using a Keras lambda layer (code line 168). A 1x1 filter with depth 3 is used to transform the color space of the images. Research has shown that different color spaces are better suited for different applications.
+My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 167-178). It has a total of 7 convolution layers followed by 3 fully connected layers. Each convolution and fully connected layer is followed by ELU activations to introduce nonlinearity, and the data is normalized in the model using a Keras lambda layer (code line 165). A 1x1 filter with depth 3 is used to transform the color space of the images. Research has shown that different color spaces are better suited for different applications.
 
 ####2. Attempts to reduce overfitting in the model
 
-To reduce overfitting, the model contains three dropout layers which follow sets of convolution layers (model.py lines 173, 178, 183). I used Udacity's provided data as well as my own recovery data to train the model. The Udacity data is randomly split into training and validation data (20% validation). Each model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+To reduce overfitting, the model contains three dropout layers which follow sets of convolution layers (model.py lines 170, 175, 180). I attempted to use Udacity's provided data as well as my own recovery data to train the model. The Udacity data is randomly split into training and validation data (20% validation). Each model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 ####3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 191). I used the default starting learning rate of 0.001 (also tested other rates but they do not make much difference.) The Dropout rate is 0.3, less than normally used 0.5, as this dataset is not big. Using 0.2 did not help addressing overfitting problem. So 0.3 is a good tradeoff point. Batch_size is picked as 32: the biggest allowed by my GPU memory. The steering angle offset I used on the left and right camera images is 0.25. 
+The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 188). I used the default starting learning rate of 0.001 (also tested other rates but they do not make much difference.) The Dropout rate is 0.3, less than normally used 0.5, as this dataset is not big. Using 0.2 did not help addressing overfitting problem. So 0.3 is a good tradeoff point. Batch_size is picked as 32: the biggest allowed by my GPU memory. The steering angle offset I used on the left and right camera images is 0.25. 
 
 ####4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I collected recovery andreverse driving and added these data to the Udacity dataset. However the combined dataset did not work well. As shown by the steering angle histograms of the Udacity data and the recovery data, these two driving behaviors are quite different. Ie. the Udacity data has a much wider range of steering angles, while my recovery data's steering angle is mostly between -0.2 and 0.2. It should explain why combining them did not work well. 
+Training data was chosen to keep the vehicle driving on the road. I collected recovery and reverse driving and added these data to the Udacity dataset. However the combined dataset did not work well. As shown by the steering angle histograms of the Udacity data and the recovery data, these two driving behaviors are quite different. I.E. the Udacity data has a much wider range of steering angles, while my recovery data's steering angle is mostly between -0.2 and 0.2. It should explain why combining them did not work well. 
 ![alt text][image1]
 ![alt text][image2]
 
@@ -74,7 +74,7 @@ As a result, I did not use the recovery data, instead I used the Udacity data's 
 
 The overall strategy for deriving a model architecture was to train a model, test it on the simulator, see where it fails, and collect more data for the failing section. At the same, I tuned the parameters, including dropout rate, learning rate, left and right images' angle offsets. 
 
-My first step was to use a convolution neural network model. I adopted the one from [Vivek] (https://chatbotslife.com/using-augmentation-to-mimic-human-driving-496b569760a9), which was proven to work on this problem. This model has a total of 23.9 Million parameters. I fed three images to the model and found that it did not always converge. When using SGD optimizer, it converged instantly (loss becoming ZERO). This proved that the model worked. But using Adam optimizer, the loss oscillated a lot. It might be because Adam adjusted the learning rate and overshot the minimal point. 
+My first step was to use a convolution neural network model. I adopted the one from [Vivek] (https://chatbotslife.com/using-augmentation-to-mimic-human-driving-496b569760a9), which was proven to work on this problem. This model has a total of 23.9 Million parameters. I fed three images to the model and found that it did not always converge if Adam optimizer. When using SGD optimizer, it converged with 5 steps (loss becoming ZERO). This proved that the model actually worked. It might be because Adam adjusted the learning rate and overshot the minimal point. 
 
 I used the left image (angle + .25), center image, and right image (angle - 0.25) in the training. In the validation, I only used center images, since the driving evaluation is based solely on the center image. Using left and right images with arbitrary angle shifts actually added more nosie to the data. As a result, the traing loss is much larger than the validation loss in the first two epochs. So in this project, I did not treat this as overfitting. As the training went on, the traing and validation losses both reduced, and traing loss became closer to the validation loss. At the end, traing and validation loss were both around 0.013. 
 
@@ -84,7 +84,7 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 ####2. Final Model Architecture
 
-The final model architecture (model.py lines 166-189) consisted of a convolution neural network with the following layers and layer sizes. Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+The final model architecture (model.py lines 164-186) consisted of a convolution neural network with the following layers and layer sizes. Here is a visualization of the architecture.
 
 ![alt text][image3]
 
