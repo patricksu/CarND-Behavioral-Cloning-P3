@@ -20,7 +20,7 @@ The goals / steps of this project are the following:
 [image4]: ./examples/UdacityImgShow.png "Udacity images show"
 [image5]: ./examples/leftRightImages.png “left and right images show”
 [image6]: ./examples/brightnessAug.png "brightness augmentation"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image7]: ./examples/Shadowing_Visualization.png "Shadowing augmentation"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -91,20 +91,16 @@ The final model architecture (model.py lines 166-189) consisted of a convolution
 ####3. Creation of the Training Set & Training Process
 
 I used the Udacity provide data together with a dataset of "afterBridge". To collectthe "afterBridge" data, I drove the vehicle back-and-forth around the muddy area for more than five laps. I also collected reverse and recovery image sets, although they were not used in building the final model. Instead I flipped the Udacity images to mimic reverse driving, and also used the left and right images to mimic recovery driving. 
-The figure below shows a few images from the Udacity dataset. It only shows image with over 0.5 steering angles. As shown, the data has some nosise. E.g. the road in image at (4,2) is straight but the angle is 0.626. However, as long as the model can generate larger angles to get the vehicle back when it is almost off-track, it should work. So the situation shown in the iamge (4,2) should not matter that much. 
+The figure below shows a few images from the Udacity dataset. It only shows image with over 0.5 steering angles. The data has some nosise. E.g. the road in image at image(4,2) is straight but the angle is 0.626. However, as long as the model can generate larger angles to get the vehicle back when it is almost off-track, it should work. So the situation shown in the iamge (4,2) should not matter that much. 
 ![alt text][image4]
 
 The figure below illustrates the left and right camera images. 
 ![alt text][image5]
 
-The figure below illustrates brightness augmentation. 
+After the collection process, I had 11493 data points, each with three images. I then preprocessed this data by some agumentations. The figure below illustrates brightness augmentation and random shadows being added. 
 ![alt text][image6]
+![alt text][image7]
 
-Etc ....
+I randomly split the 11493 data points into training and validation dataset, with 20% as validaiton. Then I implemented a generator that randomly sample from the training data points. It firstly randomly picked one from three (left, center, and right images), then added random brightness and shadowing augmentations. Finally, under 50% it flipped the image and reverse the steering angle. Line 87 to 113 in model.py implemented this. In this way, the generator can generate unlimited sets of batch training samples. For the validation data, I did not use any augmentation, instead I picked only the central images. 
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
-
-
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data generator for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 5. I used an adam optimizer so that manually training the learning rate wasn't necessary.
