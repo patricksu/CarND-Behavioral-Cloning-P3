@@ -24,7 +24,7 @@ flags.DEFINE_float('prob', 0.5, 'prob of being picked for less than 0.1 angles')
 
 
 driving_log_dir = []
-# driving_log_dir.append("./afterBridge2")
+driving_log_dir.append("./afterBridge2")
 driving_log_dir.append("./data")
 
 samples = []
@@ -190,8 +190,4 @@ model.compile(optimizer=oper,loss='mse')
 model.fit_generator(train_generator, steps_per_epoch = math.ceil(len(train_samples)/FLAGS.batch_size), 
 	epochs = FLAGS.epochs, verbose = 1, validation_data = valid_generator, 
 	validation_steps = math.ceil(len(valid_samples)/FLAGS.batch_size))
-
-for i in range(20):
-	model.fit(x = overfit_train_samples, y = overfit_train_steers, batch_size = 4, epochs = 1)
-	print(model.evaluate(x = overfit_valid_samples, y = overfit_valid_steers, batch_size = 4))
 model.save('model.h5')
